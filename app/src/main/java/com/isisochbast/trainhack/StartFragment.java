@@ -27,7 +27,7 @@ import java.net.URL;
 /**
  * Created by Lovisa on 2016-08-25.
  */
-public class StartFragment extends Fragment implements GetDistance.Geo {
+public class StartFragment extends Fragment  {
 
     private EditText mStartEditStext;
     private EditText mSlutEditText;
@@ -53,6 +53,7 @@ public class StartFragment extends Fragment implements GetDistance.Geo {
         mStartEditStext = (EditText) view.findViewById(R.id.start_editText);
         mSlutEditText = (EditText) view.findViewById(R.id.slut_editText);
         mBerakna = (Button) view.findViewById(R.id.berakna_button);
+
         mAvstandTextView = (TextView) view.findViewById(R.id.avstand);
         mSumTextView = (TextView) view.findViewById(R.id.sum);
         mTagTextView = (TextView) view.findViewById(R.id.tag);
@@ -60,18 +61,14 @@ public class StartFragment extends Fragment implements GetDistance.Geo {
         mBussTextView = (TextView) view.findViewById(R.id.buss);
         mFlygTextView = (TextView) view.findViewById(R.id.flyg);
         mValkommen = (TextView) view.findViewById(R.id.valkommen);
+
         mValkommen.setTypeface(pasifico);
         mStartEditStext.setTypeface(oswald);
         mSlutEditText.setTypeface(oswald);
         mBerakna.setTypeface(oswald);
         //mStartDest.setTypeface(oswald);
         //mSlutDest.setTypeface(oswald);
-        mAvstandTextView.setTypeface(oswald);
-        mSumTextView.setTypeface(oswald);
-        mTagTextView.setTypeface(oswald);
-        mFlygTextView.setTypeface(oswald);
-        mBussTextView.setTypeface(oswald);
-        mBilTextView.setTypeface(oswald);
+
         try {
             URL url = new URL("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40.6655101,-73.89188969999998&destinations=40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.6905615%2C-73.9976592%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626%7C40.659569%2C-73.933783%7C40.729029%2C-73.851524%7C40.6860072%2C-73.6334271%7C40.598566%2C-73.7527626&key=YOUR_API_KEYy=AIzaSyCCFP1Zdu51zwsF1x7mRlkRwYbxTwuqvdo");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -96,7 +93,7 @@ public class StartFragment extends Fragment implements GetDistance.Geo {
                 String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + mStartDest + "&destinations=" + mSlutDest + "&mode=driving&language=fr-FR&avoid=tolls&key=AIzaSyCCFP1Zdu51zwsF1x7mRlkRwYbxTwuqvdo";
 
 
-                 new GetDistance(StartFragment.this.getContext()).execute(url);
+                 new GetDistance(StartFragment.this.getContext(), mAvstandTextView, mTagTextView, mFlygTextView).execute(url);
                 // new GetDistance().execute(url);
             }
 //                                            setDouble("500000");
@@ -109,7 +106,7 @@ public class StartFragment extends Fragment implements GetDistance.Geo {
     return view;
 }
 
-    @Override
+   /* @Override
     public void setDouble(String result) {
         String res[] = result.split(",");
         double dist = Integer.parseInt(res[0]) / 1000;
@@ -125,6 +122,6 @@ public class StartFragment extends Fragment implements GetDistance.Geo {
         mBilTextView.setText(String.format("Bil %s", dist * 0.26));
 
     }
-
+*/
 
 }

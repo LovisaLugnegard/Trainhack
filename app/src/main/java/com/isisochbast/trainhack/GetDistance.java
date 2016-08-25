@@ -2,8 +2,10 @@ package com.isisochbast.trainhack;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -22,16 +24,37 @@ import java.net.URL;
  * Created by Lovisa on 2016-08-25.
  */
 public class GetDistance extends AsyncTask<String, Void, String> {
+    private TextView mAvstandTextView;
+    private TextView mSumTextView;
+    private TextView mTagTextView;
+    private TextView mFlygTextView;
+    private TextView mBussTextView;
+    private TextView mBilTextView;
+    private TextView mValkommen;
 
 
     Context mContext;
-    Geo geo1;
+    //Geo geo1;
 
     //constructor is used to get the context.
-    public GetDistance(Context mContext) {
+    public GetDistance(Context mContext, TextView avsTV, TextView tTV, TextView fTV) {
         this.mContext = mContext;
  //        geo1 = (Geo) mContext;
+this.mAvstandTextView = avsTV;
+        this.mTagTextView = tTV;
+        this.mFlygTextView = fTV;
 
+
+        Typeface oswald = Typeface.createFromAsset(mContext.getAssets(), "fonts/Oswald-Heavy.ttf");
+        Typeface pasifico = Typeface.createFromAsset(mContext.getAssets(), "fonts/Pacifico.ttf");
+
+        mAvstandTextView.setTypeface(oswald);
+      //  mSumTextView.setTypeface(oswald);
+        mTagTextView.setTypeface(oswald);
+        mFlygTextView.setTypeface(oswald);
+        /*mBussTextView.setTypeface(oswald);
+        mBilTextView.setTypeface(oswald);
+*/
     }
 
     //This function is executed before before "doInBackground(String...params)" is executed to dispaly the progress dialog
@@ -45,7 +68,7 @@ public class GetDistance extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String aDouble) {
         super.onPostExecute(aDouble);
         if (aDouble != null) {
-           geo1.setDouble(aDouble);
+           setDouble(aDouble);
         } else
             Toast.makeText(mContext, "Error! Please Try Again wiht proper values", Toast.LENGTH_SHORT).show();
     }
@@ -97,8 +120,21 @@ public class GetDistance extends AsyncTask<String, Void, String> {
         return null;
     }
 
-    interface Geo{
-         void setDouble(String min);
+
+    public void setDouble(String result) {
+        String res[] = result.split(",");
+        double dist = Integer.parseInt(res[0]) / 1000;
+        mAvstandTextView.setText("Du reser " + dist + " kilometers");
+//        mSumTextView.setText(R.string.utslapp);
+
+
+       mTagTextView.setText(String.format("Tåg %s kg CO2", dist * 0.06));
+        mFlygTextView.setText(String.format("Flyg %s kg CO2", dist * 0.18));
+
+      //  mBussTextView.setText(String.format("Buss %s", dist * 0.089));
+
+        //mBilTextView.setText(String.format("Bil %s", dist * 0.26));
+
     }
 
 
