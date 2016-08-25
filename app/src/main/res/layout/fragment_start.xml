@@ -6,7 +6,14 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.isisochbast.trainhack.MainActivity">
+    tools:context="com.isisochbast.trainhack.MainActivity"
+    android:background="@drawable/b3"
+    android:scaleType="centerCrop" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/valkommen"/>
 
     <EditText
         android:id="@+id/start_editText"
@@ -25,4 +32,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_berakna"/>
+
+    <TextView
+        android:id="@+id/avstand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
 </LinearLayout>
