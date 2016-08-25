@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Trainhack</string>
+    <string name="hint_slut">Jag ska resa till...</string>
+    <string name="hint_start">Jag ska resa från...</string>
+    <string name="text_berakna">Beräkna växthusgasutsläpp</string>
+</resources>
