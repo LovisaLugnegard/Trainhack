@@ -25,13 +25,14 @@ public class GetDistance extends AsyncTask<String, Void, String> {
 
 
     Context mContext;
-  //  Geo geo1;
+    Geo geo1;
 
     //constructor is used to get the context.
-   /* public GetDistance(Context mContext) {
+    public GetDistance(Context mContext) {
         this.mContext = mContext;
-      //  geo1 = (Geo) mContext;
-    }*/
+ //        geo1 = (Geo) mContext;
+
+    }
 
     //This function is executed before before "doInBackground(String...params)" is executed to dispaly the progress dialog
     @Override
@@ -44,9 +45,9 @@ public class GetDistance extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String aDouble) {
         super.onPostExecute(aDouble);
         if (aDouble != null) {
-           // geo1.setDouble(aDouble);
+           geo1.setDouble(aDouble);
         } else
-            Toast.makeText(mContext, "Error4!Please Try Again wiht proper values", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "Error! Please Try Again wiht proper values", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -94,6 +95,10 @@ public class GetDistance extends AsyncTask<String, Void, String> {
 
 
         return null;
+    }
+
+    interface Geo{
+         void setDouble(String min);
     }
 
 
